@@ -26,10 +26,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct MyApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ContentView()
+                    .tabItem {
+                        Label("Inicio", systemImage: "house")
+                    }
+                
+                ContentView()
+                    .tabItem {
+                        Label("Categorías", systemImage: "square.grid.2x2")
+                    }
+            }
         }
     }
+    
 }
