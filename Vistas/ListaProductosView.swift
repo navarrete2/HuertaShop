@@ -5,11 +5,12 @@
 //  Created by Miguel  on 10/3/24.
 //
 import SwiftUI
+
 struct ListaProductosView: View {
-    @ObservedObject var viewModel: ProductoViewModel
+    @EnvironmentObject var viewModel: ProductoViewModel
 
     var body: some View {
-        List(viewModel.productos) { producto in
+        List(viewModel.productosFiltrados) { producto in
             ProductoView(producto: producto)
         }
         .onAppear {

@@ -24,23 +24,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 @main
-struct MyApp: App {
+struct TuApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
+    @StateObject var productoViewModel = ProductoViewModel()
+
     var body: some Scene {
         WindowGroup {
-            TabView {
-                ContentView()
-                    .tabItem {
-                        Label("Inicio", systemImage: "house")
-                    }
-                
-                ContentView()
-                    .tabItem {
-                        Label("Categorías", systemImage: "square.grid.2x2")
-                    }
-            }
+            ContentView()
+                .environmentObject(productoViewModel)
         }
     }
-    
 }

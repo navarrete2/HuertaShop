@@ -9,9 +9,20 @@ import Firebase
 
 class ProductoViewModel: ObservableObject {
     @Published var productos = [Producto]()
-    
+    @Published var textoDeBusqueda = ""
+
     private var db = Firestore.firestore()
     
+    var productosFiltrados: [Producto] {
+        if textoDeBusqueda.isEmpty {
+            return productos
+        } else {
+            return productos.filter { producto in
+                producto.nombre.lowercased().contains(textoDeBusqueda.lowercased())
+            }
+        }
+    }
+
     func fetchProductos() {
         db.collection("Huerta").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
